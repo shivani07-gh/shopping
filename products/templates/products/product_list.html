@@ -93,10 +93,74 @@
     </div>
 
 </div>
+<div class="container mt-4">
+
+    <input 
+        type="text" 
+        id="searchInput" 
+        class="form-control mb-4"
+        placeholder="Search products..."
+        onkeyup="searchProducts()"
+    >
+
+    <div class="row" id="productContainer">
+
+        {% for product in products %}
+
+        <div class="col-md-4 mb-4 product-card">
+
+            <div class="card shadow p-3">
+
+                <h5 class="product-name">{{ product.name }}</h5>
+
+                <p>{{ product.category }}</p>
+
+                <h6 class="text-primary">₹{{ product.price }}</h6>
+
+                <a href="/product/{{ product.id }}/" class="btn btn-dark w-100">
+                    View Details
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
 
 <div class="footer">
-    © 2026 Smart AI Store | Built with Django & AI
+    © 2026 Smart AI Store | Built with Django and AI
 </div>
+<script>
+
+function searchProducts() {
+
+    let input = document.getElementById("searchInput").value.toLowerCase();
+
+    let cards = document.getElementsByClassName("product-card");
+
+    for (let i = 0; i < cards.length; i++) {
+
+        let name = cards[i].getElementsByClassName("product-name")[0].innerText.toLowerCase();
+
+        if (name.includes(input)) {
+
+            cards[i].style.display = "block";
+
+        } else {
+
+            cards[i].style.display = "none";
+
+        }
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>
